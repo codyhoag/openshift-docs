@@ -114,17 +114,21 @@ for platform containers and provide telemetry data to Red Hat.
 ====
 endif::[]
 
-.Load balancers
+== Load balancers
 
-Before you install {product-title}, you must provision two layer-4 load
-balancers. The API requires one load balancer and the default Ingress Controller
-needs the second load balancer to provide ingress to applications.
+Before you install {product-title}, you must provision two load balancers. The requirements for these load balancers are as follows:
 
+1. *API Load Balancer*: Provides a common endpoint for users (both human and machine) to interact with and configure the platform.
+  * Layer 4 load balancing only (this is sometimes referred to as Raw TCP, SSL Passthrough, or SSL Bridge mode)
+  * Round robin load balancing
+  * The following ports should be configured on both the front and back of the load balancers.
++
+.API Load Balancer
 [cols="2a,5a,2a,2a,2a",options="header"]
 |===
 
 |Port
-|Machines
+|Back-end Machines (Pool Members)
 |Internal
 |External
 |Description
@@ -143,6 +147,24 @@ balancer after the bootstrap machine initializes the cluster control plane.
 |
 |Machine Config server
 
+|===
+
+
+2. *Application Ingress Load Balancer*: Provides an ingress point for application traffic flowing in from outside of the cluster.
+  * Layer 4 load balancing only (this is sometimes referred to as Raw TCP, SSL Passthrough, or SSL Bridge mode)
+  * Round robin load balancing
+  * The following ports should be configured on both the front and back of the load balancers.
++
+.Application Ingress Load Balancer
+[cols="2a,5a,2a,2a,2a",options="header"]
+|===
+
+|Port
+|Back-end Machines (Pool Members)
+|Internal
+|External
+|Description
+
 |`443`
 |The machines that run the Ingress router pods, compute, or worker, by default.
 |x
@@ -156,6 +178,11 @@ balancer after the bootstrap machine initializes the cluster control plane.
 |HTTP traffic
 
 |===
+
+[TIP]
+====
+In some cases, enabling source IP-based session persistence may improve performance for applications using end-to-end TLS encryption. This assumes that the true IP of the client can be seen by the load balancer, which varies based on network setup.
+====
 
 [NOTE]
 ====
