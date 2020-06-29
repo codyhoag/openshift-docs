@@ -114,21 +114,26 @@ for platform containers and provide telemetry data to Red Hat.
 ====
 endif::[]
 
-== Load balancers
+[id="installation-network-user-infra-load-balancers_{context}"]
+=== Load balancers
 
-Before you install {product-title}, you must provision two load balancers. The requirements for these load balancers are as follows:
+Before you install {product-title}, you must provision two load balancers that meet the following requirements:
 
-1. *API Load Balancer*: Provides a common endpoint for users (both human and machine) to interact with and configure the platform.
-  * Layer 4 load balancing only (this is sometimes referred to as Raw TCP, SSL Passthrough, or SSL Bridge mode)
-  * Round robin load balancing
-  * The following ports should be configured on both the front and back of the load balancers.
+. *API Load Balancer*: Provides a common endpoint for users, both human and machine, to interact with and configure the platform. Configure one of the following strategies:
 +
-.API Load Balancer
+--
+  ** Layer 4 load balancing only. This is sometimes referred to as Raw TCP, SSL Passthrough, or SSL Bridge mode.
+  ** Round robin load balancing.
+--
++
+Configure following ports on both the front and back of the load balancers:
++
+.API load balancer
 [cols="2a,5a,2a,2a,2a",options="header"]
 |===
 
 |Port
-|Back-end Machines (Pool Members)
+|Back-end machines (pool members)
 |Internal
 |External
 |Description
@@ -150,17 +155,17 @@ balancer after the bootstrap machine initializes the cluster control plane.
 |===
 
 
-2. *Application Ingress Load Balancer*: Provides an ingress point for application traffic flowing in from outside of the cluster.
-  * Layer 4 load balancing only (this is sometimes referred to as Raw TCP, SSL Passthrough, or SSL Bridge mode)
-  * Round robin load balancing
-  * The following ports should be configured on both the front and back of the load balancers.
+. *Application Ingress Load Balancer*: Provides an ingress point for application traffic flowing in from outside of the cluster.
+You must configure layer 4 load balancing, which is sometimes referred to as Raw TCP, SSL Passthrough, or SSL Bridge mode.
 +
-.Application Ingress Load Balancer
+Configure following ports on both the front and back of the load balancers:
++
+.Application ingress load balancer
 [cols="2a,5a,2a,2a,2a",options="header"]
 |===
 
 |Port
-|Back-end Machines (Pool Members)
+|Back-end machines (pool members)
 |Internal
 |External
 |Description
@@ -181,7 +186,7 @@ balancer after the bootstrap machine initializes the cluster control plane.
 
 [TIP]
 ====
-In some cases, enabling source IP-based session persistence may improve performance for applications using end-to-end TLS encryption. This assumes that the true IP of the client can be seen by the load balancer, which varies based on network setup.
+If the true IP address of the client can be seen by the load balancer, enabling source IP-based session persistence can improve performance for applications that use end-to-end TLS encryption.
 ====
 
 [NOTE]
