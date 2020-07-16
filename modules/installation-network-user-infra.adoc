@@ -126,7 +126,7 @@ Before you install {product-title}, you must provision two load balancers that m
   ** Round robin load balancing.
 --
 +
-Configure following ports on both the front and back of the load balancers:
+Configure the following ports on both the front and back of the load balancers:
 +
 .API load balancer
 [cols="2a,5a,2a,2a,2a",options="header"]
@@ -140,7 +140,8 @@ Configure following ports on both the front and back of the load balancers:
 
 |`6443`
 |Bootstrap and control plane. You remove the bootstrap machine from the load
-balancer after the bootstrap machine initializes the cluster control plane.
+balancer after the bootstrap machine initializes the cluster control plane. You
+must configure the `/readyz` endpoint for the API server health check probe.
 |x
 |x
 |Kubernetes API server
