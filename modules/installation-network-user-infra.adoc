@@ -155,6 +155,12 @@ balancer after the bootstrap machine initializes the cluster control plane.
 
 |===
 
+[NOTE]
+====
+The load balancer should be configured to take a maximum of 30 seconds from the
+time the API server turns off the `/readyz` endpoint to the removal of the API
+server instance from the pool.
+====
 
 . *Application Ingress Load Balancer*: Provides an ingress point for application traffic flowing in from outside of the cluster.
 You must configure layer 4 load balancing, which is sometimes referred to as Raw TCP, SSL Passthrough, or SSL Bridge mode.
