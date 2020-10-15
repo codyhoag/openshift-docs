@@ -7,19 +7,9 @@
 [id="installation-user-infra-machines-static-network_{context}"]
 = Advanced {op-system} installation reference
 
-This section illustrates the networking configuration and other advanced options that allow you to modify the {op-system-first} bare metal install process. The following tables describe the kernel arguments and command-line options you can use with the {op-system} live installer and the `coreos-installer` command.
-
-[discrete]
-== Routing and bonding options at {op-system} boot prompt
-
-If you install {op-system} from an ISO image, you can add kernel arguments manually when you boot that image to configure the node's networking. If no networking arguments are used, the installation defaults to using DHCP.
-
-[IMPORTANT]
-====
-When adding networking arguments, you must also add the `rd.neednet=1` kernel argument.
-====
-
-The following table describes how to use `ip=`, `nameserver=`, and `bond=` kernel arguments for live ISO installs.
+If you install {op-system-first} from an ISO image, you can add kernel arguments
+when you boot that image to configure the node's networking.
+The following table describes and illustrates how to use those kernel arguments.
 
 .Routing and bonding options for ISO
 [source,adoc]
