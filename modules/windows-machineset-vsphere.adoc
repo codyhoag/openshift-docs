@@ -42,8 +42,6 @@ spec:
           diskGiB: 128
           kind: VSphereMachineProviderSpec
           memoryMiB: 16384
-          metadata:
-            creationTimestamp: null
           network:
             devices:
             - networkName: "<vm_network_name>" <5>
@@ -52,7 +50,7 @@ spec:
           snapshot: ""
           template: <windows_vm_template_name> <6>
           userDataSecret:
-            name: worker-user-data-managed <7>
+            name: windows-user-data-managed <7>
           workspace:
              datacenter: <vcenter_datacenter_name> <8>
              datastore: <vcenter_datastore_name> <9>
@@ -70,7 +68,7 @@ $ oc get -o jsonpath='{.status.infrastructureName}{"\n"}' infrastructure cluster
 <3> Configure the machine set as a Windows machine.
 <4> Configure the Windows node as a compute machine.
 <5> Specify the vSphere VM network to deploy the machine set to.
-<6> Specify the Windows vSphere VM template to use, such as `user-5ddjd-rhcos`.
+<6> Specify the Windows vSphere VM template to use.
 <7> Created by the WMCO when it is configuring the first Windows machine. After that, the `windows-user-data-managed` is available for all subsequent machine sets to consume.
 <8> Specify the vCenter Datacenter to deploy the machine set on.
 <9> Specify the vCenter Datastore to deploy the machine set on.

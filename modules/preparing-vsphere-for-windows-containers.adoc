@@ -7,6 +7,7 @@
 
 You must prepare your vSphere environment for Windows container workloads.
 
+[id="creating-the-vsphere-windows-vm-golden-image_{context}"]
 == Creating the vSphere Windows VM golden image
 
 Create a vSphere Windows virtual machine (VM) golden image.
@@ -145,13 +146,9 @@ An example `unattend.xml` is provided. Make sure to customize the example to fit
 ----
 ====
 
-== vSphere environment changes for Windows container workloads
+[id="enabling-internal-api-server-vsphere_{context}"]
+== Enabling communication with the internal API server
 
 The WMCO downloads the Ignition files from the internal API server endpoint. To enable this, add a new DNS entry for `api-int.<cluster_name>.<base_domain>` which points to the external API server URL `api.<cluster_name>.<base_domain>`. The external API endpoint was already created as part of the initial cluster installation on vSphere.
-
-[NOTE]
-====
-For Linux nodes, CoreDNS is running on every node which helps in resolving the internal API server URL.
-====
 
 This new DNS entry ensures that the Windows VM can download the Ignition files from the internal API server, and the kubelet on the configured VM can communicate with the internal API server.
