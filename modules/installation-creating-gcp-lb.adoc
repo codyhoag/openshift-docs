@@ -135,7 +135,7 @@ EOF
 +
 [source,terminal]
 ----
-$ gcloud deployment-manager deployments create ${INFRA_ID}-lb --config 02_infra.yaml
+$ gcloud deployment-manager deployments create ${INFRA_ID}-infra --config 02_infra.yaml
 ----
 
 . Export the cluster IP address:
